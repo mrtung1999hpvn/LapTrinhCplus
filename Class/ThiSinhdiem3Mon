@@ -1,0 +1,121 @@
+//a) Thông tin của các thí sinh thi đại học gồm: tên thí sinh, số báo danh, điểm thi ba môn (môn một, môn hai, môn ba). Hãy cài đặt lớp thí sinh với các phương thức: cấu tử mặc định, cấu tử có tham số, toán tử nhập, xuất và hàm tính tổng điểm (= điểm môn một + điểm môn hai + điểm môn ba).
+//b) Giả sử đối với các thí sinh là con thương binh, liệt sĩ và con em vùng sâu vùng xa thì có thêm điểm ưu tiên và công thức tính tổng điểm là = điểm môn một + điểm môn hai + điểm môn ba + điểm ưu tiên. Xây dựng các lớp trên sử dụng kỹ thuật đa thể và ràng buộc động. Viết chương trình cho phép nhập vào một mảng các thí sinh, in ra tổng điểm của tất cả các thí sinh đó và cho biết thí sinh nào thi đỗ, thi trượt. Điều kiện thi đỗ là không môn nào bị điểm 0 và tổng điểm >= 15.
+//Code:
+#include<iostream>
+
+using namespace std;
+class ThiSinh
+{
+	protected:
+		char Hoten[50];
+		float Diem1;
+		float Diem2;
+		float Diem3;
+	public :
+		ThiSinh(){}
+		void Nhap()
+		{
+			fflush(stdin);
+			cout<<"Nhap ho ten : ";cin.getline(Hoten,50);
+			cout<<"Diem mon 1 : ";cin>>Diem1;
+			cout<<"Diem mon 2 : ";cin>>Diem2;
+			cout<<"Diem mon 3 : ";cin>>Diem3;
+		}
+		void Xuat()
+		{
+			cout<<"Nhap ho ten : "<<Hoten;
+			cout<<"Diem mon 1 : "<<Diem1;
+			cout<<"Diem mon 2 : "<<Diem2;
+			cout<<"Diem mon 3 : "<<Diem3;
+		}
+		float TongDiem()
+		{
+			return Diem1 + Diem2 + Diem3;
+		}
+		float getDiem1()
+		{
+			return Diem1;
+		}
+		float getDiem2()
+		{
+			return Diem2;
+		}
+		float getDiem3()
+		{
+			return Diem3;
+		}
+};
+class UuTien : public ThiSinh
+{
+	protected:
+		float DiemUuTien;
+	public :
+		UuTien(){}
+		void Nhap()
+		{
+			ThiSinh::Nhap();
+			cout<<"Diem uu tien : ";cin>>DiemUuTien;
+		}
+		void Xuat()
+		{
+			ThiSinh::Xuat();
+			cout<<"Diem uu tien : "<<DiemUuTien;
+		}
+		float DiemTT()
+		{
+			return ThiSinh::TongDiem()+DiemUuTien;
+		}
+		float getDiem1()
+		{
+			return ThiSinh::getDiem1();
+		}
+		float getDiem2()
+		{
+			return ThiSinh::getDiem2();
+		}
+		float getDiem3()
+		{
+			return ThiSinh::getDiem3();
+		}
+};
+int main()
+{
+	int n,m;
+	//
+	cout<<"Nhap so luong thi sinh binh thuong : ";cin>>n;
+	ThiSinh *ts= new ThiSinh[n+1];
+	for (int i = 1;i<=n;i++)
+	{
+		ts[i].Nhap();
+	}
+	for (int i = 1;i<=n;i++)
+	{
+		ts[i].Xuat();
+	}
+	cout<<"Nhap so luong thi sinh uu tien : ";cin>>m;
+	UuTien *ut = new UuTien[n+1];
+	for (int i = 1;i<=m;i++)
+	{
+		ut[i].Nhap();
+	}
+	for (int i = 1;i<=m;i++)
+	{
+		ut[i].Xuat();
+	}
+	//Do
+	for (int i = 1;i<=n;i++)
+	{
+		if(ts[i].getDiem1() !=0 && ts[i].getDiem2() != 0 && ts[i].getDiem1() != 0 &&ts[i].TongDiem() >= 15)
+		{
+			ts[i].Xuat();
+		}
+	}
+	for (int i = 1;i<=m;i++)
+	{
+		if(ut[i].getDiem1() !=0 && ut[i].getDiem2() != 0 && ut[i].getDiem3() != 0 &&ut[i].DiemTT() >= 15)
+		{
+			ut[i].Xuat();
+		}
+	}
+	return 0;
+}
