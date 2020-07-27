@@ -8,10 +8,9 @@ int main()
     int t=0;
     for(int i=a.length();i>=0;i--) // Sắp xếp nổi bọt 
     {
-        
         kq+=a[i];
         if(i==0){break;}
-        if(t%3==0 && t!=0){kq+=",";}
+        if(t%3==0 && t!=0){kq+=".";}
         t++;
     }
     reverse(kq.begin(), kq.end()); 
