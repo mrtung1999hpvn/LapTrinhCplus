@@ -1,0 +1,26 @@
+#include <iostream>
+#include <algorithm> 
+
+using namespace std;
+
+// string -> 
+// chu so
+// so
+// ky tu
+
+int main()
+{
+    string tien = "50000000";string kq=" )D(";
+    int dem =0;
+    for(int i = tien.length() - 1 ;i>=0;i--)
+    {
+        kq+=tien[i];
+        dem ++;
+        (dem % 3 == 0 && i!=0) ? kq += "." : kq+="";
+        
+    }
+    cout<<kq<<endl;
+    reverse(kq.begin(), kq.end()); 
+    cout<<kq;
+    return 0;
+}
